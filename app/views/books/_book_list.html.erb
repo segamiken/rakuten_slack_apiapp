@@ -1,0 +1,21 @@
+<% if @books.present? %>
+  <% @books.each do |book| %>
+  	<%= form_for @book do |f| %>
+
+    <div class="list">
+    <% if book['smallImageUrl'] %>
+      <%= link_to (image_tag(book['smallImageUrl'], style: "width: 70px;height: 100px;display: inline-block;")), book['itemUrl'] %>
+    <% end %>
+    <%= book['title'] %>
+    <%= book['author'] %>
+
+  <%= f.hidden_field :title, value: book['title']  %>
+ 	<%= f.hidden_field :author, value: book['author'] %>
+ 	<%= f.hidden_field :smallImageUrl, value: book['smallImageUrl']  %>
+ 	<%= f.hidden_field :itemUrl,value: book['itemUrl']  %>
+
+    <%= f.submit "Slackへ送信" %>
+    </div>
+    <% end %>
+  <% end %>
+<% end %>
